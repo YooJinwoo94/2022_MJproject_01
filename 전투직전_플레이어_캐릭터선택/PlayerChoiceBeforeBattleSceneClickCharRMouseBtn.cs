@@ -59,6 +59,7 @@ public class PlayerChoiceBeforeBattleSceneClickCharRMouseBtn : MonoBehaviour, IP
         playerChoiceBeforeBattleSceneUiClickManager.clickGridNum = Int32.Parse(clickObj.name);
         int[] gridXY = playerChoiceBeforeBattleSceneSceneManager.changeNumToGrid(playerChoiceBeforeBattleSceneUiClickManager.clickGridNum);
         playerChoiceBeforeBattleSceneSceneManager.outFromGrid(gridXY);
+        playerChoiceBeforeBattleSceneSceneManager.putGridDataToPlayPabServer();
     }
     public void playerCharPressRightClickchangeBtn()
     {

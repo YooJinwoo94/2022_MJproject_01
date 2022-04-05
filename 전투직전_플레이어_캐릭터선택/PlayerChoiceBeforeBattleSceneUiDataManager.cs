@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Spine.Unity;
+using BehaviorDesigner.Runtime;
+
 
 public class PlayerChoiceBeforeBattleSceneUiDataManager : MonoBehaviour
 {
     public GameObject[] playerCharInGridPosNum;
-   public GameObject playerCharInGrid;
-    [HideInInspector]
-    public string[,] playerCharChoiceData = new string[3, 3];
-   [HideInInspector]
-   public int playerCharChoiceCount = 0;
+    public GameObject playerCharInGrid;
+
+    public SkeletonGraphic[] playerSkeletonGraphicSet;
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
-
+using UnityEngine.SceneManagement;
 
 
 public class PlayerChoiceBeforeBattleSceneUiClickManager : MonoBehaviour
@@ -56,5 +56,20 @@ public class PlayerChoiceBeforeBattleSceneUiClickManager : MonoBehaviour
        int [] gridXY =  playerChoiceBeforeBattleSceneSceneManager.changeNumToGrid(clickGridNum);
 
         playerChoiceBeforeBattleSceneSceneManager.outFromGrid(gridXY);
+        playerChoiceBeforeBattleSceneSceneManager.putGridDataToPlayPabServer();
+    }
+
+
+    public void clickToggleBtnOfGrid(int num)
+    {
+        playerChoiceBeforeBattleSceneUIMoveManager.clickToggleBtnOfGrid(num);
+
+        playerChoiceBeforeBattleSceneSceneManager.nowGridNum = num;
+        playerChoiceBeforeBattleSceneSceneManager.setGridDataFromServer();
+    }
+
+    public void moveToBattleScene()
+    {
+        SceneManager.LoadScene("InGameScene");
     }
 }
