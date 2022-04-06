@@ -20,6 +20,8 @@ public class CanSpecialAttack : Conditional
 
     public override TaskStatus OnUpdate()
 	{
+        if (distanceToTarget == null) return TaskStatus.Failure;
+
         if ((charState.attackRange >= distanceToTarget.Value) &&
             (charState.skillPoint >= 100) )
         {

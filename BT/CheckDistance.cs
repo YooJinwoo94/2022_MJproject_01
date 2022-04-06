@@ -19,22 +19,16 @@ public class CheckDistance : Action
 	public SharedBool isEnemyOn;
 
 
-	InGameSceneUiDataManager inGameSceneUiDataManager;
+	public InGameSceneUiDataManager inGameSceneUiDataManager;
 	AIDestinationSetter aIDestinationSetter;
 
 
+	
 
 	public override void OnStart()
 	{
-		if (isEnemyOn.Value == false) return;
-		if (inGameSceneUiDataManager == null)
-        {
-			inGameSceneUiDataManager = GameObject.Find("Manager").GetComponent<InGameSceneUiDataManager>();
-		}
-	    if (aIDestinationSetter == null)
-        {
-			aIDestinationSetter =  this.gameObject.GetComponentInParent<AIDestinationSetter>();
-		}
+		inGameSceneUiDataManager = GameObject.Find("Manager").GetComponent<InGameSceneUiDataManager>();
+		aIDestinationSetter = this.gameObject.GetComponentInParent<AIDestinationSetter>();
 
 		getTarget();
 	}
@@ -45,10 +39,12 @@ public class CheckDistance : Action
 		switch (this.gameObject.transform.tag)
         {
 			case "playerChar":
+				if (inGameSceneUiDataManager.enemyObjList.Count == 0) return;
 				distanceToTarget.Value = checkDistancePlayerToEnemy();
 				break;
 
 			case "enemyChar":
+				if (inGameSceneUiDataManager.playerObjList.Count == 0) return;
 				distanceToTarget.Value = checkDistanceEnemyToPlayer();
 				break;
         }
@@ -68,6 +64,10 @@ public class CheckDistance : Action
 			//더 가까운 존재.
 			if (distanceForOrgin > distanceForSub)
 			{
+
+				Debug.Log("aa");
+
+
 				distanceForOrgin = distanceForSub;
 				target.Value = inGameSceneUiDataManager.enemyObjList[i];
 				aIDestinationSetter.target = inGameSceneUiDataManager.enemyObjList[i].transform;
@@ -75,7 +75,6 @@ public class CheckDistance : Action
 		}
 		return distanceForOrgin;
 	}
-	
 	// 
 	float checkDistanceEnemyToPlayer()
 	{
@@ -102,6 +101,17 @@ public class CheckDistance : Action
 
 	public override TaskStatus OnUpdate()
 	{
+		switch (this.gameObject.transform.tag)
+		{
+			case "playerChar":
+				if (inGameSceneUiDataManager.enemyObjList.Count == 0) return TaskStatus.Failure;
+				break;
+
+			case "enemyChar":
+				if (inGameSceneUiDataManager.playerObjList.Count == 0) return TaskStatus.Failure;
+				break;
+		}
+
 		return TaskStatus.Success;
 	}
 }

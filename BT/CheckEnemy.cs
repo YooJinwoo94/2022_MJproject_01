@@ -32,13 +32,11 @@ public class CheckEnemy : Conditional
                 if (inGameSceneUiDataManager.leftEnemyCount <= 0)
                 {
                     isEnemyOn.Value = false;
-
                     return TaskStatus.Success;
                 }
                 else
                 {
                     isEnemyOn.Value = true;
-
                     return TaskStatus.Success;
                 }
                                                                                          
