@@ -8,17 +8,14 @@ using System.Collections.Generic;
 public class CheckEnemy : Conditional
 {
      public InGameSceneUiDataManager inGameSceneUiDataManager;
-     public SharedBool isEnemyOn;
+    // public SharedBool isEnemyOn;
 
 
 
 
     public override void OnStart()
     {
-          if (inGameSceneUiDataManager == null)
-           {
-             inGameSceneUiDataManager = GameObject.Find("Manager").GetComponent<InGameSceneUiDataManager>();
-          }
+        inGameSceneUiDataManager = GameObject.Find("Manager").GetComponent<InGameSceneUiDataManager>();
     }
 
 
@@ -31,12 +28,12 @@ public class CheckEnemy : Conditional
                 // 현재 남아있는 아이가 없다! 
                 if (inGameSceneUiDataManager.leftEnemyCount <= 0)
                 {
-                    isEnemyOn.Value = false;
+                    //isEnemyOn.Value = false;
                     return TaskStatus.Success;
                 }
                 else
                 {
-                    isEnemyOn.Value = true;
+                   // isEnemyOn.Value = true;
                     return TaskStatus.Success;
                 }
                                                                                          
@@ -44,12 +41,12 @@ public class CheckEnemy : Conditional
                 // 현재 남아있는 아이가 없다! 
                 if (inGameSceneUiDataManager.leftPlayerCount <= 0)
                 {
-                    isEnemyOn.Value = false;
+                   // isEnemyOn.Value = false;
                     return TaskStatus.Success;
                 }              
                 else 
                 {
-                    isEnemyOn.Value = true;
+                   // isEnemyOn.Value = true;
                     return TaskStatus.Success;
                 }                                                     
         }

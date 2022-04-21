@@ -8,7 +8,7 @@ public class Dead : Action
 
 	public override void OnStart()
 	{
-		repeatorrepeator.repeatForever = false;
+		//repeatorrepeator.repeatForever = false;
 		Debug.Log("aa");
 	}
 

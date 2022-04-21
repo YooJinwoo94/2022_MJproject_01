@@ -4,25 +4,24 @@ using BehaviorDesigner.Runtime.Tasks;
 
 public class CanSpecialAttack : Conditional
 {
-	CharState charState;
-
-    public SharedFloat distanceToTarget;
+    InGameSceneCheckTargetAndGetDistance inGameSceneCheckTargetAndGetDistance;
+    CharState charState;
 
 
     public override void OnStart()
     {
-        if (charState == null )
-        {
-            charState = gameObject.GetComponent<CharState>();
-        }
+        inGameSceneCheckTargetAndGetDistance = gameObject.transform.GetComponent<InGameSceneCheckTargetAndGetDistance>();
 
+        charState = gameObject.GetComponent<CharState>();
     }
 
     public override TaskStatus OnUpdate()
 	{
-        if (distanceToTarget == null) return TaskStatus.Failure;
+        if ( charState.nowState != CharState.NowState.isReadyForAttack) return TaskStatus.Failure;
 
-        if ((charState.attackRange >= distanceToTarget.Value) &&
+        if (inGameSceneCheckTargetAndGetDistance.distanceToTarget == 0) return TaskStatus.Failure;
+
+        if ((charState.attackRange >= inGameSceneCheckTargetAndGetDistance.distanceToTarget) &&
             (charState.skillPoint >= 100) )
         {
             return TaskStatus.Success;

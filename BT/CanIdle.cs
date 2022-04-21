@@ -7,19 +7,28 @@ using BehaviorDesigner.Runtime.Tasks;
 
 public class CanIdle : Conditional
 {
-	public SharedBool isEnemyOn;
+	public bool isEnemyOn = true;
+	CharState charState;
 
+	
+
+
+	public override void OnStart()
+	{
+		charState = this.gameObject.transform.GetComponent<CharState>();
+	}
 
 	public override TaskStatus OnUpdate()
 	{
-		if (isEnemyOn.Value == false)
+		if (isEnemyOn == false)
 		{
 			Debug.Log("다음 스테이지로 넘어가든가 아니면 전투 종료");
-			return TaskStatus.Failure;
+
+			charState.nowState = CharState.NowState.isIdle;
 		}
-		else if (isEnemyOn.Value == true)
+		else if (isEnemyOn == true)
 		{
-			return TaskStatus.Success;
+			return TaskStatus.Failure;
 		}
 		return TaskStatus.Success;
 	}
