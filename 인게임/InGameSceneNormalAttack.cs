@@ -1,34 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
+using BehaviorDesigner.Runtime;
 using UnityEngine;
+
 
 public class InGameSceneNormalAttack : MonoBehaviour
 {
     [SerializeField]
-    CharState charState;
+    CharState playerCharState;
+    CharState enemyCharState;
     [SerializeField]
-    BoxCollider2D weaponCollider;
+    BehaviorTree behaviorTree;
 
 
-    [SerializeField]
-    Transform attackPos;
-    [SerializeField]
-    Vector2 size;
-   // public LayerMask whatIsLayer;
+    SharedGameObject obj;
+    GameObject target;
+    InGameSceneCheckTargetAndGetDistance inGameSceneCheckTargetAndGetDistance;
 
 
-
-    void Update()
+    private void Start()
     {
-        if (charState.nowState == CharState.NowState.isAttack)
-        {
-            Collider2D[] hit = Physics2D.OverlapBoxAll(attackPos.position, size, 0);
-        }
+        inGameSceneCheckTargetAndGetDistance = gameObject.GetComponent<InGameSceneCheckTargetAndGetDistance>();
     }
 
-    void OnDrawGizmos()
+
+    public void attackEnemy()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(attackPos.position, size);
+        //obj = (SharedGameObject)behaviorTree.GetVariable("target");
+        //target = obj.Value;
+
+        if (inGameSceneCheckTargetAndGetDistance.target == null) return;
+
+        enemyCharState = inGameSceneCheckTargetAndGetDistance.target.GetComponentInChildren<CharState>();
+
+        int damage = playerCharState.attackPower - enemyCharState.defensePower;
+        if (damage <= 0) damage = 1;
+        enemyCharState.hpPoint -= damage;
     }
 }

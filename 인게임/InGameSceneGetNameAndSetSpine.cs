@@ -20,6 +20,8 @@ public class InGameSceneGetNameAndSetSpine : MonoBehaviour
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().name != "InGameScene") return;
+
         if (inGameSceneUiDataManager == null)
         {
             inGameSceneUiDataManager = GameObject.Find("Manager").GetComponent<InGameSceneUiDataManager>();
@@ -33,6 +35,7 @@ public class InGameSceneGetNameAndSetSpine : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (SceneManager.GetActiveScene().name != "InGameScene") return;
         if (this.gameObject.activeInHierarchy != true) return;
         if (charState.charName != null) return;
         if (!this.gameObject.transform.parent) return;
