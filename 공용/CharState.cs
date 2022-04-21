@@ -17,18 +17,18 @@ public class CharState : MonoBehaviour
         isAttack,
         isIdle,
         isDamaged,
-        isWalk
+        isWalk,
+        isReadyForAttack,
+        isFindingBush,
     }
-    [HideInInspector]
     public NowState nowState;
 
-
-    public float attackRange = 1.3f;
-    public float moveSpeed = 10;
+    public float attackRange = 1.5f;
+    public float moveSpeed = 1f;
 
     public string charName;
     public int attackPower = 50;
-    public int defensePower = 50;
+    public int defensePower = 30;
     public int hpPoint = 200;
     public int skillPoint = 0;
 
