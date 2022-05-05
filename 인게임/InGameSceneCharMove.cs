@@ -5,11 +5,12 @@ using UnityEngine;
 public class InGameSceneCharMove : MonoBehaviour
 {
     [SerializeField]
+    PathManager pathManager;
+    [SerializeField]
     Transform moveForwardPos;
     [SerializeField]
     Transform charTransform;
-   // [SerializeField]
-   // Rigidbody2D rid;
+
 
     CharState charState;
     InGameSceneCheckTargetAndGetDistance inGameSceneCheckTargetAndGetDistance;
@@ -17,12 +18,22 @@ public class InGameSceneCharMove : MonoBehaviour
     {
         inGameSceneCheckTargetAndGetDistance = gameObject.transform.GetComponent<InGameSceneCheckTargetAndGetDistance>();
         charState = gameObject.transform.GetComponent<CharState>();
+      
     }
 
-    public void moveToEnemy(int wayX)
+    public void moveToEnemy()
     {
-        charTransform.position =
-            Vector2.MoveTowards(charTransform.position, inGameSceneCheckTargetAndGetDistance.target.transform.position, 1f * Time.deltaTime);
+        pathManager.pathFinding();
+        if (pathManager.FinalNodeList.Count == 0) return;
+
+        if (pathManager.FinalNodeList.Count == 1) return;
+        Vector2 movePos = new Vector2Int(pathManager.FinalNodeList[1].x, pathManager.FinalNodeList[1].y);
+        Vector2 currentPos = new Vector2Int(Mathf.RoundToInt(this.gameObject.transform.position.x), Mathf.RoundToInt(this.gameObject.transform.position.y));
+       
+       // if (currentPos == movePos) movePos = new Vector2(pathManager.FinalNodeList[1].x, pathManager.FinalNodeList[1].y);
+
+        charTransform.position =    
+            Vector2.MoveTowards(charTransform.position, movePos, 1f * Time.deltaTime);
     }
 
     public void moveForward()
@@ -46,4 +57,5 @@ public class InGameSceneCharMove : MonoBehaviour
         }
         return false;
     }
+
 }

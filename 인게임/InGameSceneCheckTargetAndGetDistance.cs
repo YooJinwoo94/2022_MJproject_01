@@ -65,7 +65,6 @@ public class InGameSceneCheckTargetAndGetDistance : MonoBehaviour
 			{
 				distanceForOrgin = distanceForSub;
 				target = inGameSceneUiDataManager.enemyObjList[i];
-				//aIDestinationSetter.target = inGameSceneUiDataManager.enemyObjList[i].transform;
 			}
 		}
 		return distanceForOrgin;
@@ -86,7 +85,6 @@ public class InGameSceneCheckTargetAndGetDistance : MonoBehaviour
 			{
 				distanceForOrgin = distanceForSub;
 				target = inGameSceneUiDataManager.playerObjList[i];
-				//aIDestinationSetter.target = inGameSceneUiDataManager.playerObjList[i].transform;
 			}
 		}
 
@@ -99,10 +97,21 @@ public class InGameSceneCheckTargetAndGetDistance : MonoBehaviour
 	public bool isEnemyOutOfAttackRange()
 	{
 		if (charState.attackRange <= distanceToTarget)
-		{
+		{	
 			return true;
 		}
+
 		return false;
 	}
 
+
+	public bool isEnemyOutOfFindRange()
+    {
+       if (charState.findRange <= distanceToTarget)
+		{
+			return true;
+		}
+
+		return false;
+	}
 }

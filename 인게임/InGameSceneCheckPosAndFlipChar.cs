@@ -13,7 +13,7 @@ public class InGameSceneCheckPosAndFlipChar : MonoBehaviour
     [SerializeField]
     GameObject charRotation;
     [SerializeField]
-    BehaviorTree behaviorTree;
+    InGameSceneCheckTargetAndGetDistance inGameSceneCheckTargetAndGetDistance;
     SharedGameObject obj;
     GameObject target;
 
@@ -21,8 +21,7 @@ public class InGameSceneCheckPosAndFlipChar : MonoBehaviour
 
     private void FixedUpdate()
     {
-        obj = (SharedGameObject)behaviorTree.GetVariable("target");
-        target = obj.Value;
+        target = inGameSceneCheckTargetAndGetDistance.target;
 
         if (target == null) return;
 

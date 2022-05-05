@@ -14,9 +14,12 @@ public class InGameSceneUiDataManager : MonoBehaviour
     public GameObject enemyObj;
     public GameObject[] enemyCharInGridPos;
     public List<GameObject> enemyObjList = new List<GameObject>();
+   // public int enemyObjCount = 0;
 
     public GameObject playerObj;
     public GameObject[] playerCharInGridPos;
+   // public int playerObjCount = 0;
+
     public List<GameObject> playerObjList = new List<GameObject>();
 
     public string[,,] enemyCharInGrid;

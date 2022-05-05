@@ -5,30 +5,40 @@ using UnityEngine;
 public class InGameSceneCheckBush : MonoBehaviour
 {
 	public GameObject bush;
+
 	[SerializeField]
 	GameObject checkPos;
 
 	public Vector2 boxSize;
 
-	public bool isBushNear()
+	CharState charState;
+
+    private void Start()
+    {
+		charState = gameObject.GetComponent<CharState>();
+	}
+
+
+    public bool isBushNear()
 	{
-		Debug.Log("부쉬 확인하기");
-
-		Collider2D[] col = Physics2D.OverlapBoxAll(checkPos.transform.position, boxSize, 0);
-
+		if (charState.nowState == CharState.NowState.isFindingBush) return true;
+		
+		Collider2D[] col = Physics2D.OverlapBoxAll(checkPos.transform.position, boxSize, 0.4f);
+	
 		foreach (Collider2D item in col)
 		{
-			if (item.tag == "usingBush")
+			switch(item.tag)
             {
-				Debug.Log("부쉬에 동료가 있다! 여긴 못사용해!");
-				return false;
-			}
-			if (item.tag == "bush")
-            {
-				item.tag = "usingBush";
-				Debug.Log("부쉬가 근처에 있다");
-				bush = item.gameObject;
-				return true;
+				case "usingBush":
+					//Debug.Log("부쉬에 동료가 있다! 여긴 못사용해!");
+					return false;
+
+				case "bush":
+					Debug.Log("부쉬에 들어간다");
+
+					item.tag = "usingBush";
+					bush = item.gameObject;
+					return true;
 			}
 		}
 		return false;

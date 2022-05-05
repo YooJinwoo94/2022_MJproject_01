@@ -110,7 +110,7 @@ public class InGameSceneUISceneManager : MonoBehaviour
     void turnOnEnemyChar(int num, string name)
     {
         GameObject enemyChatObj = Instantiate(inGameSceneUiDataManager.enemyObj, inGameSceneUiDataManager.enemyCharInGridPos[num].transform);
-        enemyChatObj.name = name;
+        enemyChatObj.name = name ;
 
         inGameSceneUiDataManager.enemyObjList.Add(enemyChatObj);
     }
