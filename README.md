@@ -1,12 +1,12 @@
 # 2022_MJproject_01
-.                                        
-.                                        
-.                                        
-.                                         
-. 
-![QDQDZX](https://user-images.githubusercontent.com/71114491/166971828-ad5f0a8e-9f6b-4260-8909-af941623f51a.PNG)
-.                                        
-.                                        
+.                                          
+.                                          
+.                                          
+.                                          
+.    
+![QDQDZX](https://user-images.githubusercontent.com/71114491/166971828-ad5f0a8e-9f6b-4260-8909-af941623f51a.PNG)     
+.                                           
+.                                          
 .                                        
 .                                         
 . 
