@@ -14,15 +14,16 @@ public class CharState : MonoBehaviour
     [HideInInspector]
     public enum NowState
     {
-        isAttack,
         isIdle,
-        isDamaged,
+        isDead,
         isWalk,
         isReadyForAttack,
         isFindingBush,
+        isCantFindBush
     }
     public NowState nowState;
 
+    public float findRange = 2f;
     public float attackRange = 1.5f;
     public float moveSpeed = 1f;
 
