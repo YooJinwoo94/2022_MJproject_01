@@ -11,4 +11,6 @@ public class PlayerChoiceBeforeBattleSceneUiDataManager : MonoBehaviour
     public GameObject playerCharInGrid;
 
     public SkeletonGraphic[] playerSkeletonGraphicSet;
+
+    public List<GameObject> clickCharRMouseBtnDetailUI = new List<GameObject>();
 }

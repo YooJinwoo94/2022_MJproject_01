@@ -11,6 +11,7 @@ public class PlayerChoiceBeforeBattleSceneClickCharRMouseBtn : MonoBehaviour, IP
     PlayerChoiceBeforeBattleSceneUiClickManager playerChoiceBeforeBattleSceneUiClickManager;
     PlayerChoiceBeforeBattleSceneSceneManager playerChoiceBeforeBattleSceneSceneManager;
     PlayerChoiceBeforeBattleSceneUIMoveManager playerChoiceBeforeBattleSceneUIMoveManager;
+    PlayerChoiceBeforeBattleSceneUiDataManager playerChoiceBeforeBattleSceneUiDataManager;
 
     public GameObject charDetailUIobj;
 
@@ -18,27 +19,48 @@ public class PlayerChoiceBeforeBattleSceneClickCharRMouseBtn : MonoBehaviour, IP
 
     private void Start()
     {
-        if (playerChoiceBeforeBattleSceneSceneManager == null) playerChoiceBeforeBattleSceneSceneManager = GameObject.Find("SceneManager").GetComponent<PlayerChoiceBeforeBattleSceneSceneManager>();
+        playerChoiceBeforeBattleSceneSceneManager = GameObject.Find("SceneManager").GetComponent<PlayerChoiceBeforeBattleSceneSceneManager>();
 
-        if (playerChoiceBeforeBattleSceneUIMoveManager == null) playerChoiceBeforeBattleSceneUIMoveManager = GameObject.Find("ui_Move_Manager").GetComponent<PlayerChoiceBeforeBattleSceneUIMoveManager>();
+        playerChoiceBeforeBattleSceneUIMoveManager = GameObject.Find("ui_Move_Manager").GetComponent<PlayerChoiceBeforeBattleSceneUIMoveManager>();
 
-        if (playerChoiceBeforeBattleSceneUiClickManager == null) playerChoiceBeforeBattleSceneUiClickManager = GameObject.Find("ui_Click_Manager").GetComponent<PlayerChoiceBeforeBattleSceneUiClickManager>();
+        playerChoiceBeforeBattleSceneUiClickManager = GameObject.Find("ui_Click_Manager").GetComponent<PlayerChoiceBeforeBattleSceneUiClickManager>();
+
+        playerChoiceBeforeBattleSceneUiDataManager = GameObject.Find("ui_Data_Manager").GetComponent<PlayerChoiceBeforeBattleSceneUiDataManager>();
     }
 
 
 
 
 
-
+    // 해당 캐릭터 누르면 발동되는 함수 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Right)
+        switch(eventData.button)
         {
-            playerCharRightClick();
+            case PointerEventData.InputButton.Right:
+
+                //같은거 누른경우
+                if (playerChoiceBeforeBattleSceneUiDataManager.clickCharRMouseBtnDetailUI.Count >= 1 &&
+                   charDetailUIobj == playerChoiceBeforeBattleSceneUiDataManager.clickCharRMouseBtnDetailUI[0])
+                {
+                    clearDetailUiList();
+                    return;
+                }
+
+                //다른거 켜주기
+                if (playerChoiceBeforeBattleSceneUiDataManager.clickCharRMouseBtnDetailUI.Count >= 1)
+                {
+                    clearDetailUiList();
+                }
+               
+                // ui창 켜준다.
+                playerChoiceBeforeBattleSceneUiDataManager.clickCharRMouseBtnDetailUI.Add(charDetailUIobj);
+                playerCharRightClick();
+                break;
         }
     }
 
-
+    
 
 
 
@@ -46,13 +68,12 @@ public class PlayerChoiceBeforeBattleSceneClickCharRMouseBtn : MonoBehaviour, IP
     //캐릭터를 오른쪽 클릭한 경우 
      void playerCharRightClick()
     {
-        if (charDetailUIobj.activeInHierarchy == true) charDetailUIobj.SetActive(false);
-        else charDetailUIobj.SetActive(true);
+        charDetailUIobj.SetActive(true);
     }
 
     public void playerCharPressRightClickAndDeleteBtn()
     {
-        if (charDetailUIobj.activeInHierarchy == true) charDetailUIobj.SetActive(false);
+        clearDetailUiList();
 
         GameObject clickObj = EventSystem.current.currentSelectedGameObject.transform.parent.parent.parent.parent.parent.gameObject;
 
@@ -63,7 +84,7 @@ public class PlayerChoiceBeforeBattleSceneClickCharRMouseBtn : MonoBehaviour, IP
     }
     public void playerCharPressRightClickchangeBtn()
     {
-        if (charDetailUIobj.activeInHierarchy == true) charDetailUIobj.SetActive(false);
+        clearDetailUiList();
 
         GameObject clickObj = EventSystem.current.currentSelectedGameObject.transform.parent.parent.parent.parent.parent.gameObject;
 
@@ -74,6 +95,12 @@ public class PlayerChoiceBeforeBattleSceneClickCharRMouseBtn : MonoBehaviour, IP
     }
     public void playerCharPressRightClickDetailBtn()
     {
-        if (charDetailUIobj.activeInHierarchy == true) charDetailUIobj.SetActive(false);
+        clearDetailUiList();
+    }
+
+    void clearDetailUiList()
+    {
+        playerChoiceBeforeBattleSceneUiDataManager.clickCharRMouseBtnDetailUI[0].SetActive(false);
+        playerChoiceBeforeBattleSceneUiDataManager.clickCharRMouseBtnDetailUI.Clear();
     }
 }
