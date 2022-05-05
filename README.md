@@ -27,3 +27,10 @@ https://github.com/jilleJr/Newtonsoft.Json-for-Unity
 < A* 관련 >                
 https://www.youtube.com/watch?v=tqwsnUkUleA&t=1208s            
 https://www.youtube.com/watch?v=1bO1FdEThnU&t=463s           
+.                                                                                                 
+.                                               
+.                                               
+.                                               
+.   
+< 개발 영상 >    
+https://www.youtube.com/playlist?list=PLevTQ-O9dylbQ0J_MpCdF6cb8KL-HGUhF
