@@ -1,5 +1,15 @@
 # 2022_MJproject_01
-                                                                                 
+.                                        
+.                                        
+.                                        
+.                                         
+. 
+![QDQDZX](https://user-images.githubusercontent.com/71114491/166971828-ad5f0a8e-9f6b-4260-8909-af941623f51a.PNG)
+.                                        
+.                                        
+.                                        
+.                                         
+. 
 개발 인원 : 3명                             
 담당 : 프로그래밍                              
 개발 시작 : 2022.03월.1일 부터                              
