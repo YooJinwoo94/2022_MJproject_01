@@ -5,14 +5,14 @@ using BehaviorDesigner.Runtime.Tasks;
 public class CanDead : Conditional
 {
 	CharState charState;
-    //
+
+
+
 
 
     public override void OnStart()
     {
-		if (charState == null) charState = GetComponent<CharState>();
-
-
+		charState = gameObject.GetComponent<CharState>();
 	}
 
 

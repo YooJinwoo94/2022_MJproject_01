@@ -22,21 +22,15 @@ public class Move : Action
         inGameSceneCharSpineAniCon = gameObject.GetComponent<InGameSceneCharSpineAniCon>();
 
         inGameSceneCharSpineAniCon.run();
-        if (inGameSceneUiDataManager.enemyObjList.Count == 0)
-        {
-            inGameSceneCharMove.moveForward();
-            Debug.Log("그냥 앞으로 걷기");
 
-            return;
-        }
         switch (this.gameObject.tag)
         {
             case "playerChar":
-                inGameSceneCharMove.moveToEnemy(1);
+                inGameSceneCharMove.moveToEnemy();
                 break;
 
             case "enemyChar":
-                inGameSceneCharMove.moveToEnemy(-1);
+                inGameSceneCharMove.moveToEnemy();
                 break;
         }
     }

@@ -39,9 +39,15 @@ public class CanNormalAttack : Conditional
 	{
         if (charState.nowState != CharState.NowState.isReadyForAttack ) return TaskStatus.Failure;
 
+        if (inGameSceneCheckTargetAndGetDistance.target ==null)
+        {
+            charState.nowState = CharState.NowState.isIdle;
+            return TaskStatus.Failure;
+        }
+
 
         // 공격 범위 이내일 경우
-        if ((charState.attackRange >= inGameSceneCheckTargetAndGetDistance.distanceToTarget)   
+        if ((inGameSceneCheckTargetAndGetDistance.isEnemyOutOfAttackRange() == false)   
             && (charState.skillPoint <= 100))
         {
            // Debug.Log("공격 범위 안에 있다다! + 일반 공격 한다!");

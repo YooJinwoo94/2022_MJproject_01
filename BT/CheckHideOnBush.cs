@@ -22,6 +22,7 @@ public class CheckHideOnBush : Conditional
 
     public override TaskStatus OnUpdate()
     {
+        if (charState.nowState == CharState.NowState.isReadyForAttack ) return TaskStatus.Failure;
         if (charState.nowState == CharState.NowState.isFindingBush) return TaskStatus.Success;
 
         if (inGameSceneCheckBush.isBushNear() == true)
@@ -29,10 +30,8 @@ public class CheckHideOnBush : Conditional
             charState.nowState = CharState.NowState.isFindingBush;
             return TaskStatus.Success;
         }
-        else
-        {
-            charState.nowState = CharState.NowState.isReadyForAttack;
-            return TaskStatus.Failure;
-        }
+        
+        charState.nowState = CharState.NowState.isReadyForAttack;
+        return TaskStatus.Failure;
     }
 }

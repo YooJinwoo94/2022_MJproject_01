@@ -7,49 +7,52 @@ using System.Collections.Generic;
 
 public class CheckEnemy : Conditional
 {
-     public InGameSceneUiDataManager inGameSceneUiDataManager;
-    // public SharedBool isEnemyOn;
-
-
+    InGameSceneCheckTargetAndGetDistance inGameSceneCheckTargetAndGetDistance;
+    InGameSceneUiDataManager inGameSceneUiDataManager;
+    InGameSceneCharSpineAniCon inGameSceneCharSpineAniCon;
+    CharState charState;
+    GameObject pastObj;
 
 
     public override void OnStart()
     {
+        inGameSceneCheckTargetAndGetDistance = gameObject.GetComponent<InGameSceneCheckTargetAndGetDistance>();
+        inGameSceneCharSpineAniCon = gameObject.GetComponent<InGameSceneCharSpineAniCon>();
         inGameSceneUiDataManager = GameObject.Find("Manager").GetComponent<InGameSceneUiDataManager>();
+        charState = gameObject.GetComponent<CharState>();
     }
 
 
     public override TaskStatus OnUpdate()
 	{
-
+        // 만약 적이 없는 경우라면 
         switch (this.gameObject.transform.tag)
         {
             case "playerChar":
-                // 현재 남아있는 아이가 없다! 
-                if (inGameSceneUiDataManager.leftEnemyCount <= 0)
+                if (inGameSceneUiDataManager.enemyObjList.Count == 0)
                 {
-                    //isEnemyOn.Value = false;
-                    return TaskStatus.Success;
+                    charState.nowState = CharState.NowState.isIdle;
+                    inGameSceneCharSpineAniCon.idle();
+                    return TaskStatus.Failure;
                 }
-                else
-                {
-                   // isEnemyOn.Value = true;
-                    return TaskStatus.Success;
-                }
-                                                                                         
+                break;
+
             case "enemyChar":
-                // 현재 남아있는 아이가 없다! 
-                if (inGameSceneUiDataManager.leftPlayerCount <= 0)
+                if (inGameSceneUiDataManager.playerObjList.Count == 0)
                 {
-                   // isEnemyOn.Value = false;
-                    return TaskStatus.Success;
-                }              
-                else 
-                {
-                   // isEnemyOn.Value = true;
-                    return TaskStatus.Success;
-                }                                                     
+                    charState.nowState = CharState.NowState.isIdle;
+                    inGameSceneCharSpineAniCon.idle();
+                    return TaskStatus.Failure;
+                }
+                break;
         }
+
+        if (pastObj != inGameSceneCheckTargetAndGetDistance.target)
+        {
+            charState.nowState = CharState.NowState.isIdle;
+        }
+        pastObj = inGameSceneCheckTargetAndGetDistance.target;
+
         return TaskStatus.Success;
     }
 }
