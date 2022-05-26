@@ -19,11 +19,13 @@
 .                                         
 .                                          
 현재까지 작업 내역 :                                                   
-플레이 팹에 사용자 등록을 하고 로그인을 한다.                                                  
+PlayFab에 사용자 등록을 하고 로그인을 한다.                                                  
 로그인 후 현재 등록 했던 캐릭터를 불러 온다.                                                  
 불러온 캐릭터를 unity상에 띄워 준다.                                                   
 캐릭터의 ai는 behavior designer 와 fsm을 사용하였습니다.                                                   
-( 전진 -> 적을 발견 -> 적으로 돌진 -> 사정거리 이내에 적이 있으면 근처에 부쉬가 있는지 검사 -> 만약 있으면 부쉬에 숨음 -> 전투 )                                             
+( 전진 -> 적을 발견 -> 적으로 돌진 -> 사정거리 이내에 적이 있으면 근처에 부쉬가 있는지 검사 -> 만약 있으면 부쉬에 숨음 -> 전투 )          
+카메라 워킹 및 배경 이동 구현.                      
+구글 시트에 있는 스테이지 데이터를 가져오기.        
 .                                                                                                 
 .                                               
 .                                               
@@ -36,7 +38,9 @@ https://www.youtube.com/watch?v=QyskStWVd9g
 https://github.com/jilleJr/Newtonsoft.Json-for-Unity           
 < A* 관련 >                
 https://www.youtube.com/watch?v=tqwsnUkUleA&t=1208s            
-https://www.youtube.com/watch?v=1bO1FdEThnU&t=463s           
+https://www.youtube.com/watch?v=1bO1FdEThnU&t=463s                      
+< 구글 시트 UNITY 연동 >              
+https://im-first-rate.tistory.com/142                    
 .                                                                                                 
 .                                               
 .                                               
