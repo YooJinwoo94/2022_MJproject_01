@@ -11,10 +11,11 @@ public class CheckHideOnBush : Conditional
     InGameSceneCheckBush inGameSceneCheckBush;
     InGameSceneCheckTargetAndGetDistance inGameSceneCheckTargetAndGetDistance;
     CharState charState;
-
+    InGameSceneUiDataManager inGameSceneUiDataManager;
 
     public override void OnStart()
     {
+        inGameSceneUiDataManager = GameObject.Find("Manager").gameObject.GetComponent<InGameSceneUiDataManager>();
         inGameSceneCheckBush = gameObject.transform.GetComponent<InGameSceneCheckBush>();
         inGameSceneCheckTargetAndGetDistance = gameObject.transform.GetComponent<InGameSceneCheckTargetAndGetDistance>();
         charState = this.gameObject.transform.GetComponent<CharState>();
@@ -22,6 +23,9 @@ public class CheckHideOnBush : Conditional
 
     public override TaskStatus OnUpdate()
     {
+        if (inGameSceneUiDataManager.waitForRaid == true) return TaskStatus.Failure;
+        if (inGameSceneUiDataManager.isBattleStart == false) return TaskStatus.Failure;
+       
         if (charState.nowState == CharState.NowState.isReadyForAttack ) return TaskStatus.Failure;
         if (charState.nowState == CharState.NowState.isFindingBush) return TaskStatus.Success;
 
