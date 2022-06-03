@@ -1,9 +1,4 @@
 # 2022_MJproject_01
-.                                          
-.                                          
-.                                          
-.                                          
-.    
 ![QDQDZX](https://user-images.githubusercontent.com/71114491/166971828-ad5f0a8e-9f6b-4260-8909-af941623f51a.PNG)   
 .                                           
 .                                          
@@ -41,8 +36,3 @@ https://www.youtube.com/watch?v=tqwsnUkUleA&t=1208s
 https://www.youtube.com/watch?v=1bO1FdEThnU&t=463s                      
 < 구글 시트 UNITY 연동 >              
 https://im-first-rate.tistory.com/142                    
-.                                                                                                 
-.                                               
-.                                               
-.                                               
-.   
