@@ -1,0 +1,99 @@
+maincharacter.png
+size:1194,269
+filter:Linear,Linear
+pma:true
+ch1/ch1 breast
+bounds:645,5,56,37
+rotate:90
+ch1/ch1 eye 1
+bounds:1148,141,124,42
+offsets:1,2,126,45
+rotate:90
+ch1/ch1 eye 2
+bounds:852,4,121,39
+offsets:3,5,126,45
+rotate:90
+ch1/ch1 face
+bounds:411,56,209,165
+offsets:1,1,211,167
+rotate:90
+ch1/ch1 hair b
+bounds:4,29,236,327
+rotate:90
+ch1/ch1 hair f
+bounds:580,65,200,195
+offsets:1,1,202,197
+rotate:90
+ch1/ch1 hat 1
+bounds:852,129,292,136
+offsets:1,1,294,138
+ch1/ch1 hat 2
+bounds:335,35,230,72
+offsets:1,1,232,74
+rotate:90
+ch1/ch1 left arm
+bounds:540,5,47,52
+offsets:0,0,47,53
+rotate:90
+ch1/ch1 left foot
+bounds:1081,22,58,103
+offsets:1,1,60,105
+ch1/ch1 left hand
+bounds:411,4,48,45
+rotate:90
+ch1/ch1 left leg
+bounds:460,5,47,76
+offsets:1,1,49,78
+rotate:90
+ch1/ch1 left shoulder
+bounds:1148,79,42,58
+ch1/ch1 ms 1
+bounds:98,9,6,5
+offsets:1,1,8,7
+rotate:90
+ch1/ch1 ms 2
+bounds:98,19,24,6
+offsets:1,1,26,8
+ch1/ch1 right arm
+bounds:596,5,45,56
+offsets:0,0,45,57
+ch1/ch1 right foot
+bounds:779,160,62,105
+ch1/ch1 right hand
+bounds:686,6,55,44
+offsets:0,0,56,44
+rotate:90
+ch1/ch1 right leg
+bounds:771,9,52,77
+rotate:90
+ch1/ch1 right shoulder
+bounds:734,7,33,54
+offsets:1,1,35,56
+ch1/ch1 riv 1
+bounds:335,6,35,25
+offsets:1,1,37,27
+ch1/ch1 riv 2
+bounds:4,4,43,21
+offsets:1,1,48,23
+ch1/ch1 riv 3
+bounds:51,5,43,20
+offsets:1,1,45,22
+ch1/ch1 stomach
+bounds:895,14,111,89
+offsets:0,0,112,89
+rotate:90
+ch1/ch1 stomach2
+bounds:988,14,111,89
+offsets:0,0,112,89
+rotate:90
+ch1/ch1 torax
+bounds:779,84,61,72
+offsets:0,0,62,72
+
+maincharacter_2.png
+size:214,364
+filter:Linear,Linear
+pma:true
+wp/c1
+bounds:4,4,206,356
+offsets:7,7,220,370
