@@ -79,10 +79,10 @@ public class PlayFabManager : MonoBehaviour
                 break;
 
                 
-             //case "InGameScene":
+            case "InGameScene":
                 // PlayFabClientAPI.GetUserReadOnlyData(request, playerInGameData, (error) => print("데이터 불러오기 실패"));
-                // PlayerChoiceBeforeBattleSceneGetStageDataFromGoogleSheet.instance.setDataToStage();
-              //  break;
+                PlayerChoiceBeforeBattleSceneGetStageDataFromGoogleSheet.instance.setDataToStage();
+                break;
         }
     }
 

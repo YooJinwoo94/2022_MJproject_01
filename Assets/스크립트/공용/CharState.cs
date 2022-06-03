@@ -5,8 +5,6 @@ using Spine.Unity;
 
 public class CharState : MonoBehaviour
 {
-
-
     [HideInInspector]
     public enum NowState
     {
@@ -16,8 +14,7 @@ public class CharState : MonoBehaviour
         isWalkToOrginPos,
         isReadyForAttack,
         isFindingBush,
-        isMoveToAttackPosBeforeBattle,
-        isWaitForBattleAndInAttackPos
+        isCantFindBush
     }
     public NowState nowState;
 
@@ -38,6 +35,4 @@ public class CharState : MonoBehaviour
     {
         nowState = NowState.isIdle;
     }
-
-
 }

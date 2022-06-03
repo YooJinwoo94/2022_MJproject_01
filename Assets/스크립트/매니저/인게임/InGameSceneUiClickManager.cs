@@ -6,13 +6,8 @@ using UnityEngine;
 
 public class InGameSceneUiClickManager : MonoBehaviour
 {
-    [SerializeField]
-    InGameSceneUiDataManager inGameSceneUiDataManager;
-    [SerializeField]
-    InGameSceneGameManager inGameSceneGameManager;
+    //[SerializeField]
+    
 
-    public void pressBattleStart()
-    {
-        inGameSceneGameManager.battleStart();
-    }
+
 }
