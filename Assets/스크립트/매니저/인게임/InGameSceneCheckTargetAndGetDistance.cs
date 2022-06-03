@@ -96,7 +96,7 @@ public class InGameSceneCheckTargetAndGetDistance : MonoBehaviour
 	// 적과의 거리를 측정하여 거리를 계산한다
 	public bool isEnemyOutOfAttackRange()
 	{
-		if (charState.attackRange <= distanceToTarget)
+		if (charState.attackRange < distanceToTarget)
 		{	
 			return true;
 		}
@@ -107,7 +107,7 @@ public class InGameSceneCheckTargetAndGetDistance : MonoBehaviour
 
 	public bool isEnemyOutOfFindRange()
     {
-       if (charState.findRange <= distanceToTarget)
+       if (charState.findRange < distanceToTarget)
 		{
 			return true;
 		}

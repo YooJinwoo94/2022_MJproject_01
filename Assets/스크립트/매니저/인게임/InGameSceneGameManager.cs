@@ -6,27 +6,84 @@ using Cinemachine;
 public class InGameSceneGameManager : MonoBehaviour
 {
     [SerializeField]
-    PlayFabManager playFabManager;
+    GameObject battleStartBtn;
     [SerializeField]
     InGameSceneUiDataManager inGameSceneUiDataManager;
+
     [SerializeField]
-    InGameSceneIfRaidEnd inGameSceneIfRaidEnd;
+    GameObject[] cinemachineVirtualCamera;
+    // 빨리 움직일 배경 
+    [SerializeField]
+    InGameSceneBGScrollManager[] inGameSceneBGScrollManager;
 
+    private void FixedUpdate()
+    {
+       if (inGameSceneUiDataManager.waitForRaid == true) inGameSceneUiDataManager.isBattleStart = false;
 
+       if (battleStartBtn.activeInHierarchy == true ||
+           inGameSceneUiDataManager.isBattleStart == true ||
+           inGameSceneUiDataManager.waitForRaid == true) return;
+
+       if (inGameSceneUiDataManager.countPlayerCharArrivedToAttackPos ==
+           inGameSceneUiDataManager.playerObjList.Count)
+        {
+            bgMove(false);
+            battleStartBtn.SetActive(true);
+        }
+    }
 
     private void Start()
     {
-        StartCoroutine("SettingStart");
+        //배경 이동
+        bgMove(true);
 
-        playFabManager.setPlayerAndEnemyData();
+        //카메라 세팅
+        isCamGetDistance(true);
+
+        // 스타트 버튼 안보이게 하기 
+        battleStartBtn.SetActive(false);
+
+        // 데이터를 받아오기
+        PlayerChoiceBeforeBattleSceneGetStageDataFromGoogleSheet.instance.setDataToStage();
+
+        // 받아온 데이터 이미지 보여주기
         setPlayerCharData();
     }
 
-    IEnumerator SettingStart()
+
+    private void Update()
     {
-        yield return new WaitForSeconds(1f);
-        inGameSceneIfRaidEnd.isCamGetDistance(false);
-        inGameSceneIfRaidEnd.bgMove(true);
+        if (inGameSceneUiDataManager.isBattleStart == true) turnOnOffPlayerCharCol(false);
+        else turnOnOffPlayerCharCol(true);
+
+
+        if (inGameSceneUiDataManager.waitForRaid == true)
+        {
+            charMove();
+
+            bgMove(true);
+            isCamGetDistance(true);
+        }
+        else ifBattleStart();
+    }
+
+
+
+
+    // 전투 시작 버튼을 누른경우 발동!
+    public void battleStart()
+    {
+        inGameSceneUiDataManager.isBattleStart = true;
+        inGameSceneUiDataManager.countPlayerCharArrivedToAttackPos = 0;
+        battleStartBtn.SetActive(false);
+
+        StartCoroutine("SettingStart");
+    }
+     IEnumerator SettingStart()
+    {
+        isCamGetDistance(false);
+        bgMove(true);
+        yield return null;
     }
 
 
@@ -36,14 +93,11 @@ public class InGameSceneGameManager : MonoBehaviour
          if (inGameSceneUiDataManager.battleSceneCount == 2) return;
 
          // 새로운 레이드가 시작될 예정입니다.
-         if (inGameSceneUiDataManager.enemyObjList.Count == 0 && inGameSceneIfRaidEnd.waitForRaid == false)
+         if (inGameSceneUiDataManager.enemyObjList.Count == 0 && inGameSceneUiDataManager.waitForRaid == false)
           {
-            inGameSceneIfRaidEnd.waitForRaid = true;
+            inGameSceneUiDataManager.waitForRaid = true;
           }
     }
-
-
-
 
 
 
@@ -105,7 +159,133 @@ public class InGameSceneGameManager : MonoBehaviour
     {
         GameObject enemyChatObj = Instantiate(inGameSceneUiDataManager.enemyObj, inGameSceneUiDataManager.enemyCharInGridPos[num].transform);
         enemyChatObj.name = name;
-
+        CharState charState = enemyChatObj.transform.GetComponentInChildren<CharState>();
+        charState.sponPos = num;
         inGameSceneUiDataManager.enemyObjList.Add(enemyChatObj);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    //한명이라도 전투가 시작하면 배경이 멈춘다. // 전투가 아니면 + 이동시 배경이 멈춘다.
+    public void ifBattleStart()
+    {
+        for (int i = 0; i < inGameSceneUiDataManager.playerObjList.Count; i++)
+        {
+            CharState charState = inGameSceneUiDataManager.playerObjList[i].transform.GetComponentInChildren<CharState>();
+
+            if (charState.nowState == CharState.NowState.isReadyForAttack || charState.nowState == CharState.NowState.isFindingBush)
+            {
+                bgMove(false);
+                isCamGetDistance(false);
+                return;
+            }
+        }
+    }
+    public void ifRunStart()
+    {
+        for (int i = 0; i < inGameSceneUiDataManager.playerObjList.Count; i++)
+        {
+            CharState charState = inGameSceneUiDataManager.playerObjList[i].transform.GetComponentInChildren<CharState>();
+
+            if (charState.nowState == CharState.NowState.isWalkToEnemy)
+            {
+                bgMove(true);
+                isCamGetDistance(true);
+                return;
+            }
+        }
+    }
+
+
+
+    public void charMove()
+    {
+        setCharAniMove();
+
+        for (int i = 0; i < inGameSceneUiDataManager.playerObjList.Count; i++)
+        {
+            CharState charState = inGameSceneUiDataManager.playerObjList[i].transform.GetComponentInChildren<CharState>();
+
+            Vector2 movePos = new Vector2(inGameSceneUiDataManager.playerCharInGridPos[charState.sponPos].transform.position.x,
+                                          inGameSceneUiDataManager.playerCharInGridPos[charState.sponPos].transform.position.y);
+
+            inGameSceneUiDataManager.playerObjList[i].transform.position = Vector3.MoveTowards(inGameSceneUiDataManager.playerObjList[i].transform.position,
+                                                                                               movePos, 1f * Time.deltaTime);
+
+            if (inGameSceneUiDataManager.playerObjList[i].transform.position == inGameSceneUiDataManager.playerCharInGridPos[charState.sponPos].transform.position)
+            {
+                nextRaidStart();
+                return;
+            }
+        }
+    }
+
+    void setCharAniMove()
+    {
+        InGameSceneCharSpineAniCon[] inGameSceneCharSpineAniCon;
+        CharState[] charState;
+
+        charState = new CharState[inGameSceneUiDataManager.playerObjList.Count];
+        inGameSceneCharSpineAniCon = new InGameSceneCharSpineAniCon[inGameSceneUiDataManager.playerObjList.Count];
+
+        for (int i = 0; i < inGameSceneUiDataManager.playerObjList.Count; i++)
+        {
+            inGameSceneCharSpineAniCon[i] = inGameSceneUiDataManager.playerObjList[i].GetComponentInChildren<InGameSceneCharSpineAniCon>();
+            charState[i] = inGameSceneUiDataManager.playerObjList[i].GetComponentInChildren<CharState>();
+
+            charState[i].nowState = CharState.NowState.isWalkToOrginPos;
+            inGameSceneCharSpineAniCon[i].run();
+        }
+    }
+
+
+
+    public void nextRaidStart()
+    {
+        inGameSceneUiDataManager.waitForRaid = false;
+
+        inGameSceneUiDataManager.battleSceneCount++;
+        setEnemyCharData();
+    }
+
+    public void bgMove(bool isMove)
+    {
+        for (int i = 0; i < inGameSceneBGScrollManager.Length; i++)
+        {
+            inGameSceneBGScrollManager[i].moveStart = isMove;
+        }
+    }
+    public void isCamGetDistance(bool isDistance)
+    {
+        if (isDistance == true)
+        {
+            cinemachineVirtualCamera[0].SetActive(true);
+            cinemachineVirtualCamera[1].SetActive(false);
+        }
+        else
+        {
+            cinemachineVirtualCamera[0].SetActive(false);
+            cinemachineVirtualCamera[1].SetActive(true);
+        }
+    }
+
+    public void turnOnOffPlayerCharCol(bool isTurnOn)
+    {
+        BoxCollider2D[] box2D = new BoxCollider2D[inGameSceneUiDataManager.playerObjList.Count];
+
+        for (int i = 0; i < inGameSceneUiDataManager.playerObjList.Count; i++)
+        {
+            box2D[i] = inGameSceneUiDataManager.playerObjList[i].GetComponent<BoxCollider2D>();
+            box2D[i].isTrigger = isTurnOn;
+        }
     }
 }
