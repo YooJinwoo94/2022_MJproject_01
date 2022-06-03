@@ -20,19 +20,18 @@ public class Move : Action
         inGameSceneCharMove = gameObject.GetComponent<InGameSceneCharMove>();
         inGameSceneUiDataManager = GameObject.Find("Manager").gameObject.GetComponent<InGameSceneUiDataManager>();
         inGameSceneCharSpineAniCon = gameObject.GetComponent<InGameSceneCharSpineAniCon>();
-
-        inGameSceneCharSpineAniCon.run();
-
+     
         switch (this.gameObject.tag)
         {
             case "playerChar":
-                inGameSceneCharMove.moveToEnemy();
+                inGameSceneCharSpineAniCon.run();
                 break;
 
             case "enemyChar":
-                inGameSceneCharMove.moveToEnemy();
+                inGameSceneCharSpineAniCon.run();
                 break;
         }
+        inGameSceneCharMove.moveToEnemy();
     }
 
     public override TaskStatus OnUpdate()

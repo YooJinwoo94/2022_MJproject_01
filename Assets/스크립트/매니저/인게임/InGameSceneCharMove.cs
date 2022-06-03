@@ -5,20 +5,26 @@ using UnityEngine;
 public class InGameSceneCharMove : MonoBehaviour
 {
     [SerializeField]
+    Rigidbody2D rid2D;
+
+    [SerializeField]
     PathManager pathManager;
     [SerializeField]
     Transform moveForwardPos;
     [SerializeField]
     Transform charTransform;
-
-
-    CharState charState;
+    [SerializeField]
     InGameSceneCheckTargetAndGetDistance inGameSceneCheckTargetAndGetDistance;
+
+    InGameSceneUiDataManager inGameSceneUiDataManager;
+    CharState charState;
+
+
     private void Start()
     {
         inGameSceneCheckTargetAndGetDistance = gameObject.transform.GetComponent<InGameSceneCheckTargetAndGetDistance>();
         charState = gameObject.transform.GetComponent<CharState>();
-      
+        inGameSceneUiDataManager = GameObject.Find("Manager").gameObject.GetComponent<InGameSceneUiDataManager>();
     }
 
     public void moveToEnemy()
@@ -26,20 +32,41 @@ public class InGameSceneCharMove : MonoBehaviour
         pathManager.pathFinding();
         if (pathManager.FinalNodeList.Count == 0) return;
 
-        if (pathManager.FinalNodeList.Count == 1) return;
+         if (pathManager.FinalNodeList.Count == 1) return;
         Vector2 movePos = new Vector2Int(pathManager.FinalNodeList[1].x, pathManager.FinalNodeList[1].y);
-        Vector2 currentPos = new Vector2Int(Mathf.RoundToInt(this.gameObject.transform.position.x), Mathf.RoundToInt(this.gameObject.transform.position.y));
        
-       // if (currentPos == movePos) movePos = new Vector2(pathManager.FinalNodeList[1].x, pathManager.FinalNodeList[1].y);
-
-        charTransform.position =    
-            Vector2.MoveTowards(charTransform.position, movePos, 1f * Time.deltaTime);
+        charTransform.position = Vector2.MoveTowards(charTransform.position, movePos, 1f * Time.deltaTime);
     }
 
-    public void moveForward()
+    public void moveToAttackPos(string thisCharName)
     {
-        charTransform.position =
-          Vector2.MoveTowards(charTransform.position, moveForwardPos.position, 1f * Time.deltaTime);
+        switch (thisCharName)
+        {
+            case "playerChar":
+                charTransform.position =
+         Vector2.MoveTowards(charTransform.position,
+         inGameSceneUiDataManager.playerCharMovePosBeforeBattle[charState.sponPos].transform.position, 1f * Time.deltaTime);
+                break;
+
+            case "enemyChar":
+                charTransform.position =
+          Vector2.MoveTowards(charTransform.position,
+          inGameSceneUiDataManager.enemyCharMovePosBeforeBattle[charState.sponPos].transform.position, 1f * Time.deltaTime);
+                break;
+        }     
+    }
+
+    public bool IsArrivedInAttackPos(string thisCharName)
+    {
+        switch (thisCharName)
+        {
+            case "playerChar":
+                if (charTransform.position == 
+                    inGameSceneUiDataManager.playerCharMovePosBeforeBattle[charState.sponPos].transform.position) return true;
+                break;
+        }
+      
+        return false;
     }
 
 

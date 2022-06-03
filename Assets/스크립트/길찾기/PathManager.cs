@@ -61,14 +61,12 @@ public class PathManager : MonoBehaviour
                     if (col.gameObject.layer == LayerMask.NameToLayer("bush")) isWall = true;
 
 
+               
 
                     if (col.gameObject.layer == LayerMask.NameToLayer(this.gameObject.tag))
-                    {
-                        CharState otherCharState = col.transform.GetComponentInChildren<CharState>();
-                        if (otherCharState.nowState == CharState.NowState.isReadyForAttack)
-                        {
-                            isWall = true;
-                        }
+                    {                     
+                        CharState otherCharState = col.transform.GetComponentInChildren<CharState>();  
+                        if (otherCharState.nowState == CharState.NowState.isReadyForAttack) isWall = true;
                     }
                 }
 

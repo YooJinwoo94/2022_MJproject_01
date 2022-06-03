@@ -21,41 +21,34 @@ using BehaviorDesigner.Runtime.Tasks;
 
 public class CanNormalAttack : Conditional
 {
-    InGameSceneIfRaidEnd inGameSceneIfRaidEnd;
     InGameSceneCheckTargetAndGetDistance inGameSceneCheckTargetAndGetDistance;
     CharState charState;
-
+    InGameSceneUiDataManager inGameSceneUiDataManager;
 
 
 
 
     public override void OnStart()
     {
-        inGameSceneIfRaidEnd = GameObject.Find("Manager").GetComponent<InGameSceneIfRaidEnd>();
+        inGameSceneUiDataManager = GameObject.Find("Manager").gameObject.GetComponent<InGameSceneUiDataManager>();
         inGameSceneCheckTargetAndGetDistance = gameObject.transform.GetComponent<InGameSceneCheckTargetAndGetDistance>();
         charState = this.gameObject.transform.GetComponent<CharState>();
     }
 
 
     public override TaskStatus OnUpdate()
-	{
+    {
+        if (inGameSceneUiDataManager.isBattleStart == false) return TaskStatus.Failure;
         if (charState.nowState != CharState.NowState.isReadyForAttack ) return TaskStatus.Failure;
-        if (inGameSceneIfRaidEnd.waitForRaid == true) return TaskStatus.Failure;
+        if (inGameSceneUiDataManager.waitForRaid == true) return TaskStatus.Failure;
 
-        if (inGameSceneCheckTargetAndGetDistance.target == null)
-        {
-            charState.nowState = CharState.NowState.isIdle;
-            return TaskStatus.Failure;
-        }
+        if (inGameSceneCheckTargetAndGetDistance.target == null) return TaskStatus.Failure;
 
 
         // 공격 범위 이내일 경우
         if ((inGameSceneCheckTargetAndGetDistance.isEnemyOutOfAttackRange() == false)   
-            && (charState.skillPoint <= 100))
-        {
-           // Debug.Log("공격 범위 안에 있다다! + 일반 공격 한다!");
-           return TaskStatus.Success;
-        }
-		return TaskStatus.Failure;
+            && (charState.skillPoint <= 100)) return TaskStatus.Success;
+
+        return TaskStatus.Failure;
 	}
 }
