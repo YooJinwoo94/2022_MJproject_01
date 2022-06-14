@@ -28,16 +28,7 @@ public class MoveToPosBeforeAttack : Action
 
     public override TaskStatus OnUpdate()
     {
-        switch (this.gameObject.tag)
-        {
-            case "playerChar":
-                inGameSceneCharSpineAniCon.run();
-                break;
-
-            case "enemyChar":
-                inGameSceneCharSpineAniCon.idle();
-                break;
-        }
+        inGameSceneCharSpineAniCon.run();
         inGameSceneCharMove.moveToAttackPos(this.gameObject.tag);
         return TaskStatus.Success;
     }

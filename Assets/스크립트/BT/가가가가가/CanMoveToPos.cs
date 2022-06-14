@@ -22,15 +22,13 @@ public class CanMoveToPos : Conditional
 
 	public override TaskStatus OnUpdate()
 	{
-		if(inGameSceneUiDataManager.waitForRaid == true &&
-				inGameSceneUiDataManager.isBattleStart == true)
+		if(inGameSceneUiDataManager.nowGameSceneState == InGameSceneUiDataManager.NowGameSceneState.playerCharMoveForNextRaid)
         {
-			charState.nowState = CharState.NowState.isWalkToOrginPos;
+			charState.nowState = CharState.NowState.isWaitForCutScene;
 			inGameSceneCharSpineAniCon.run();
 		}
 		else
         {
-		    ////charState.nowState = CharState.NowState.isIdle;
 			inGameSceneCharSpineAniCon.idle();
 			return TaskStatus.Failure;
 		}

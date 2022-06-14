@@ -38,9 +38,8 @@ public class CanNormalAttack : Conditional
 
     public override TaskStatus OnUpdate()
     {
-        if (inGameSceneUiDataManager.isBattleStart == false) return TaskStatus.Failure;
         if (charState.nowState != CharState.NowState.isReadyForAttack ) return TaskStatus.Failure;
-        if (inGameSceneUiDataManager.waitForRaid == true) return TaskStatus.Failure;
+        if (inGameSceneUiDataManager.nowGameSceneState != InGameSceneUiDataManager.NowGameSceneState.battleStart) return TaskStatus.Failure;
 
         if (inGameSceneCheckTargetAndGetDistance.target == null) return TaskStatus.Failure;
 

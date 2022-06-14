@@ -23,8 +23,7 @@ public class CheckHideOnBush : Conditional
 
     public override TaskStatus OnUpdate()
     {
-        if (inGameSceneUiDataManager.waitForRaid == true) return TaskStatus.Failure;
-        if (inGameSceneUiDataManager.isBattleStart == false) return TaskStatus.Failure;
+        if (inGameSceneUiDataManager.nowGameSceneState != InGameSceneUiDataManager.NowGameSceneState.battleStart) return TaskStatus.Failure;
        
         if (charState.nowState == CharState.NowState.isReadyForAttack ) return TaskStatus.Failure;
         if (charState.nowState == CharState.NowState.isFindingBush) return TaskStatus.Success;

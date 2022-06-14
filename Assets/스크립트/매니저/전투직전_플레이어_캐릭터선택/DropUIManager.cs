@@ -3,35 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
 
-public class DropUIManager : MonoBehaviour, IPointerEnterHandler, IDropHandler, IPointerExitHandler
+public class DropUIManager : MonoBehaviour, IDropHandler
 {
-	private Image image;
 	private RectTransform rect;
 
 	private void Start()
 	{
-		image = GetComponent<Image>();
 		rect = GetComponent<RectTransform>();
 	}
 
-	/// <summary>
-	/// 마우스 포인트가 현재 아이템 슬롯 영역 내부로 들어갈 때 1회 호출
-	/// </summary>
-	public void OnPointerEnter(PointerEventData eventData)
-	{
-		// 아이템 슬롯의 색상을 노란색으로 변경
-		//image.color = Color.yellow;
-	}
 
-	/// <summary>
-	/// 마우스 포인트가 현재 아이템 슬롯 영역을 빠져나갈 때 1회 호출
-	/// </summary>
-	public void OnPointerExit(PointerEventData eventData)
-	{
-		// 아이템 슬롯의 색상을 하얀색으로 변경
-		//image.color = Color.white;
-	}
+    
+    
 
 	/// <summary>
 	/// 현재 아이템 슬롯 영역 내부에서 드롭을 했을 때 1회 호출
