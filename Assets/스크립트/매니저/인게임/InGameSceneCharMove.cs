@@ -5,9 +5,6 @@ using UnityEngine;
 public class InGameSceneCharMove : MonoBehaviour
 {
     [SerializeField]
-    Rigidbody2D rid2D;
-
-    [SerializeField]
     PathManager pathManager;
     [SerializeField]
     Transform moveForwardPos;
@@ -35,7 +32,7 @@ public class InGameSceneCharMove : MonoBehaviour
          if (pathManager.FinalNodeList.Count == 1) return;
         Vector2 movePos = new Vector2Int(pathManager.FinalNodeList[1].x, pathManager.FinalNodeList[1].y);
        
-        charTransform.position = Vector2.MoveTowards(charTransform.position, movePos, 1f * Time.deltaTime);
+        charTransform.position = Vector2.MoveTowards(charTransform.position, movePos, charState.moveSpeed * Time.deltaTime);
     }
 
     public void moveToAttackPos(string thisCharName)
@@ -45,17 +42,18 @@ public class InGameSceneCharMove : MonoBehaviour
             case "playerChar":
                 charTransform.position =
          Vector2.MoveTowards(charTransform.position,
-         inGameSceneUiDataManager.playerCharMovePosBeforeBattle[charState.sponPos].transform.position, 1f * Time.deltaTime);
+         inGameSceneUiDataManager.playerCharMovePosBeforeBattle[charState.sponPos].transform.position, charState.moveSpeed * Time.deltaTime);
                 break;
 
             case "enemyChar":
                 charTransform.position =
           Vector2.MoveTowards(charTransform.position,
-          inGameSceneUiDataManager.enemyCharMovePosBeforeBattle[charState.sponPos].transform.position, 1f * Time.deltaTime);
+          inGameSceneUiDataManager.enemyCharMovePosBeforeBattle[charState.sponPos].transform.position, charState.moveSpeed * Time.deltaTime);
                 break;
         }     
     }
 
+    //애들이 스폰하고 위치로 도착했는지 체크하기
     public bool IsArrivedInAttackPos(string thisCharName)
     {
         switch (thisCharName)
@@ -63,6 +61,11 @@ public class InGameSceneCharMove : MonoBehaviour
             case "playerChar":
                 if (charTransform.position == 
                     inGameSceneUiDataManager.playerCharMovePosBeforeBattle[charState.sponPos].transform.position) return true;
+                break;
+
+            case "enemyChar":
+                if (charTransform.position ==
+                   inGameSceneUiDataManager.enemyCharMovePosBeforeBattle[charState.sponPos].transform.position) return true;
                 break;
         }
       
@@ -73,7 +76,7 @@ public class InGameSceneCharMove : MonoBehaviour
     public void moveToBush(GameObject bush)
     {
         charTransform.position =
-            Vector2.MoveTowards(charTransform.position, bush.transform.position, 1f * Time.deltaTime);
+            Vector2.MoveTowards(charTransform.position, bush.transform.position, charState.moveSpeed * Time.deltaTime);
     }
 
     public bool checkCharIsInBush(GameObject bush)

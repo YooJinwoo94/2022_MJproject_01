@@ -64,8 +64,10 @@ public class PlayerChoiceBeforeBattleSceneGetStageDataFromGoogleSheet : MonoBeha
            InGameSceneUiDataManager inGameSceneUiDataManager = GameObject.Find("Manager").GetComponent<InGameSceneUiDataManager>();
            InGameSceneGameManager inGameSceneGameManager = GameObject.Find("Manager").GetComponent<InGameSceneGameManager>();
            inGameSceneUiDataManager.enemyCharInGrid = JsonConvert.DeserializeObject<string[,,]>(JsonConvert.DeserializeObject(test).ToString());
-           inGameSceneGameManager.setEnemyCharData(); 
+           //inGameSceneGameManager.setEnemyCharData(); 
     }
+
+    //ªË¡¶
     /*
 public void getStageName(string stageName)
 {

@@ -4,8 +4,19 @@ using UnityEngine;
 using Spine.Unity;
 using BehaviorDesigner.Runtime;
 
+
 public class InGameSceneUiDataManager : MonoBehaviour
 {
+    public enum NowGameSceneState
+    {
+        playerCharMoveForNextRaid,
+        battleStart,
+        canMoveCharBeforeBattle,
+        cutScene_playerCharWalkIn,
+        cutScene_enemyCharWalkIn
+    }
+    public NowGameSceneState nowGameSceneState;
+
     [SerializeField]
     GameObject startBattleBtn;
 
@@ -30,6 +41,5 @@ public class InGameSceneUiDataManager : MonoBehaviour
     public int battleSceneCount = 0 ;
 
     public int countPlayerCharArrivedToAttackPos = 0;
-    public bool isBattleStart = false;
-    public bool waitForRaid = false;
+    public int countEnemyCharArrivedToAttackPos = 0;
 }

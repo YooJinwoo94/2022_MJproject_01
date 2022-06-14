@@ -10,13 +10,11 @@ public class CharState : MonoBehaviour
     [HideInInspector]
     public enum NowState
     {
-        isIdle,
         isDead,
         isWalkToEnemy,
-        isWalkToOrginPos,
+        isWaitForCutScene,
         isReadyForAttack,
         isFindingBush,
-        isMoveToAttackPosBeforeBattle,
         isWaitForBattleAndInAttackPos
     }
     public NowState nowState;
@@ -36,7 +34,7 @@ public class CharState : MonoBehaviour
 
     private void Start()
     {
-        nowState = NowState.isIdle;
+        nowState = NowState.isWaitForCutScene;
     }
 
 

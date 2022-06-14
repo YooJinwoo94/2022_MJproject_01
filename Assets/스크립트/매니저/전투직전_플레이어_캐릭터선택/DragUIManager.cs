@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using System;
 
 
-public class DragUIManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DragUIManager : MonoBehaviour, IBeginDragHandler , IDragHandler, IEndDragHandler
 {
 	private Transform canvas;               // UI가 소속되어 있는 최상단의 Canvas Transform
 	private Transform previousParent;       // 해당 오브젝트가 직전에 소속되어 있었던 부모 Transfron

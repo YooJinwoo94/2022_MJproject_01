@@ -12,7 +12,7 @@ public class CheckEnemy : Conditional
     InGameSceneUiDataManager inGameSceneUiDataManager;
     InGameSceneCharSpineAniCon inGameSceneCharSpineAniCon;
     CharState charState;
-    GameObject pastObj;
+   // GameObject pastObj;
 
 
     public override void OnStart()
@@ -26,12 +26,16 @@ public class CheckEnemy : Conditional
 
     public override TaskStatus OnUpdate()
 	{
-        if (inGameSceneUiDataManager.waitForRaid == true)
+        if (inGameSceneUiDataManager.nowGameSceneState == InGameSceneUiDataManager.NowGameSceneState.cutScene_playerCharWalkIn ||
+            inGameSceneUiDataManager.nowGameSceneState == InGameSceneUiDataManager.NowGameSceneState.cutScene_enemyCharWalkIn) return TaskStatus.Success;
+
+        if (inGameSceneUiDataManager.nowGameSceneState == InGameSceneUiDataManager.NowGameSceneState.playerCharMoveForNextRaid)
         {
-            charState.nowState = CharState.NowState.isWalkToOrginPos;
+            charState.nowState = CharState.NowState.isWaitForCutScene;
             inGameSceneCharSpineAniCon.run();
             return TaskStatus.Failure;
         }
+
 
         // 만약 적이 없는 경우라면 
         switch (this.gameObject.transform.tag)
@@ -39,7 +43,7 @@ public class CheckEnemy : Conditional
             case "playerChar":
                 if (inGameSceneUiDataManager.enemyObjList.Count == 0 )
                 {
-                    //charState.nowState = CharState.NowState.isIdle;
+                  //  charState.nowState = CharState.NowState.isIdle;
                     inGameSceneCharSpineAniCon.idle();
                     return TaskStatus.Failure;
                 }
@@ -48,16 +52,16 @@ public class CheckEnemy : Conditional
             case "enemyChar":
                 if (inGameSceneUiDataManager.playerObjList.Count == 0)
                 {
-                    //charState.nowState = CharState.NowState.isIdle;
+                   // charState.nowState = CharState.NowState.isIdle;
                     inGameSceneCharSpineAniCon.idle();
                     return TaskStatus.Failure;
                 }
                 break;
         }
 
-        if (pastObj != inGameSceneCheckTargetAndGetDistance.target) charState.nowState = CharState.NowState.isIdle;
+       // if (pastObj != inGameSceneCheckTargetAndGetDistance.target) charState.nowState = CharState.NowState.isIdle;
 
-        pastObj = inGameSceneCheckTargetAndGetDistance.target;
+        //pastObj = inGameSceneCheckTargetAndGetDistance.target;
 
         return TaskStatus.Success;
     }
