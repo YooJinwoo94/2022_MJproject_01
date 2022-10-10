@@ -57,7 +57,7 @@ http://ko.esotericsoftware.com/spine-unity-events
 캐릭터 변신시 혹은 skeletonDataAsset를 변경할때 주의점 :                   
 https://shakddoo.tistory.com/entry/Unity-Spine-SkeletonDataAsset-change-in-Runtime                      
                                              
-Unity내 Spine 설치 방법 :                                  
+Unity Spine 설치 방법 :                                  
 https://www.youtube.com/watch?v=bMs66hVL84o                              
                                              
 Unity내 Spine Animation 설정하는 방법 :                    
