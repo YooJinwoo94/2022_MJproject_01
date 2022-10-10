@@ -36,11 +36,23 @@ https://www.youtube.com/playlist?list=PLevTQ-O9dylbQ0J_MpCdF6cb8KL-HGUhF
 .                                                                                                                                   
 참고 사이트 :                                                            
 < 플레이 팹 관련 >                                                          
-https://www.youtube.com/watch?v=QyskStWVd9g                              
+https://www.youtube.com/watch?v=QyskStWVd9g                   
+
 < JSON으로 저장 관련 / Newtonsoft.Json-for-Unity을 사용하였습니다. >                                                 
-https://github.com/jilleJr/Newtonsoft.Json-for-Unity           
+https://github.com/jilleJr/Newtonsoft.Json-for-Unity             
+                                                           
 < A* 관련 >                
 https://www.youtube.com/watch?v=tqwsnUkUleA&t=1208s            
-https://www.youtube.com/watch?v=1bO1FdEThnU&t=463s                      
+https://www.youtube.com/watch?v=1bO1FdEThnU&t=463s        
+                                  
 < 구글 시트 UNITY 연동 >              
-https://im-first-rate.tistory.com/142                    
+https://im-first-rate.tistory.com/142           
+                                                    
+< Spine 관련 >                                      
+Spine EventListener를 활용하여 원하는 애니메이션 타이밍떄 함수 호출이 가능하도록 설정 :  
+https://thd0011.tistory.com/34                            
+https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=ithitchhiker&logNo=220169846522           
+http://ko.esotericsoftware.com/spine-unity-events                          
+                                            
+캐릭터 변신시 혹은 skeletonDataAsset를 변경할때 주의점 : 
+https://shakddoo.tistory.com/entry/Unity-Spine-SkeletonDataAsset-change-in-Runtime                   
