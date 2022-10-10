@@ -54,5 +54,5 @@ https://thd0011.tistory.com/34
 https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=ithitchhiker&logNo=220169846522           
 http://ko.esotericsoftware.com/spine-unity-events                          
                                             
-캐릭터 변신시 혹은 skeletonDataAsset를 변경할때 주의점 : 
+캐릭터 변신시 혹은 skeletonDataAsset를 변경할때 주의점 :                   
 https://shakddoo.tistory.com/entry/Unity-Spine-SkeletonDataAsset-change-in-Runtime                   
