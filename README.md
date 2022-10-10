@@ -1,7 +1,15 @@
-# 2022_MJproject_01
-![QDQDZX](https://user-images.githubusercontent.com/71114491/166971828-ad5f0a8e-9f6b-4260-8909-af941623f51a.PNG)   
+# 2022_MJproject_01 
+![12e21ed](https://user-images.githubusercontent.com/71114491/194821854-99afd6b1-d390-48b6-8f5b-dadf5f9ced3e.PNG)     
+                                             
+                                                                                          
+                                                                                          
+![12e21ed](https://user-images.githubusercontent.com/71114491/194821942-41f23f95-20bd-4376-a95b-96c379dbce48.PNG)
+                                             
+   
+                                                
+![3213e21](https://user-images.githubusercontent.com/71114491/194821949-bd7136a9-953d-4a4f-bc72-a5a227ef1446.PNG)
 .                                           
-.                                          
+.                                         
 .                                        
 .                                         
 .  
